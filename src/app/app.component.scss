@@ -1,0 +1,11 @@
+.gridwrapper {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    border-style: solid;
+    
+    border-color: red;
+    border-width: 1px;
+    
+
+}
