@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridpatternComponent implements OnInit {
 
+  content: any // document.getElementById('dynamic')
+  
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.dynamicGenerate()
   }
 
+  dynamicGenerate () {
+    // we can grab an element and overwrite the HTML on the element:
+    document.getElementById('dynamic').innerHTML = '<h4> testme </h4>'
+    // we can grab an element and overwrite the CSS on the element:
+    document.getElementById('dynamic').className = 'filled'   // <-- add this into the SCSS
+  }                                                           // so we can toggle fill/empty
+
+  
 }
