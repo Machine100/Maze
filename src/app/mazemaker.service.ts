@@ -11,7 +11,7 @@ export class MazemakerService {
   cursorRow: number                     
   cursorColumn: number
   board: Cell[][]
-  stack: []
+  stack: string[]
 
   initBoard() {
     let row:number = 0
@@ -27,7 +27,6 @@ export class MazemakerService {
             wallLeft: true,
             wallRight: true
           }
-          console.log('row:',row,'column',column,this.board)
       }
     }
     console.log('board:',this.board)
@@ -51,6 +50,11 @@ export class MazemakerService {
     this.cursorColumn = 0
   }
 
+  drawCursor(){
+    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
+    document.getElementById(cursorId).className = 'filled'
+  }
+
   checkDown(){
     let onStack:boolean = false
     let result = this.board[this.cursorRow + 1][this.cursorColumn]
@@ -71,6 +75,26 @@ export class MazemakerService {
     else return true
   }
   
+  checkLeft(){
+    let onStack:boolean = false
+    let result = this.board[this.cursorRow][this.cursorColumn - 1]
+    this.stack.forEach(item=>{        //check if id is on stack
+      if (item === result.id) {onStack=true}
+    })   
+    if ( (result.visited)||(onStack) ) {return false}
+    else return true
+  }
+
+  checkUp(){
+    let onStack:boolean = false
+    let result = this.board[this.cursorRow - 1][this.cursorColumn]
+    this.stack.forEach(item=>{        //check if id is on stack
+      if (item === result.id) {onStack=true}
+    })   
+    if ( (result.visited)||(onStack) ) {return false}
+    else return true
+  }
+
   chooseMove(){
     let resultDown:boolean = false
     let resultRight:boolean = false
@@ -89,6 +113,7 @@ export class MazemakerService {
       if (random === 2 && resultUp) {return 'up'}
       if (random === 3 && resultLeft) {return 'left'}
     }
+    return 'none'     // cursor is at a dead end
   }
 
   knockoutWalls(direction:string){
@@ -97,33 +122,63 @@ export class MazemakerService {
       case 'down':
         this.board[this.cursorRow][this.cursorColumn].wallDown = false
         this.board[this.cursorRow + 1][this.cursorColumn].wallUp = false
+        break
       case 'right':
         this.board[this.cursorRow][this.cursorColumn].wallRight = false
         this.board[this.cursorRow][this.cursorColumn + 1].wallLeft = false
+        break
       case 'up':
         this.board[this.cursorRow][this.cursorColumn].wallUp = false
-        this.board[this.cursorRow + 1][this.cursorColumn].wallDown = false
+        this.board[this.cursorRow - 1][this.cursorColumn].wallDown = false
+        break
       case 'left':
         this.board[this.cursorRow][this.cursorColumn].wallLeft = false
-        this.board[this.cursorRow][this.cursorColumn + 1].wallRight = false
+        this.board[this.cursorRow][this.cursorColumn - 1].wallRight = false
         }
   }
 
   moveCursor(direction:string){
     switch (direction) {
-      case 'down': ++this.cursorRow
-      case 'right': ++this.cursorColumn
-      case 'up': --this.cursorRow
+      case 'down': ++this.cursorRow; break
+      case 'right': ++this.cursorColumn; break
+      case 'up': --this.cursorRow; break
       case 'left': --this.cursorColumn
     }
+    console.log('cursorRow',this.cursorRow,'cursorColumn:',this.cursorColumn)
+    console.log('stack:',this.stack)
   }
 
-  startAlgo(){
-    console.log('board at start:',this.board)
+  backTrack(){
+    let backtrackRow:number
+    let backtrackColumn:number
+    
+    this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
+    //start loop until
+    
+    //-------------get last position and put into test variables
+    let result:string = this.stack.pop() ; console.log ('result:', result)
+    let resultarray:string[] = result.split('') ; console.log('resultarray',resultarray)
+    backtrackRow = Number(resultarray[0]);
+    backtrackColumn = Number(resultarray[1])
+    //---------------
+
+    //  chk if any moves possible
+    //    if so, break and begin at checkMoves
+    //set master position to this spot and recursivly call self
+  }
+  
+  runAlgo(){
+    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
+      console.log('cursorId:',cursorId)
     let chosenDirection:string = this.chooseMove()
+      console.log(chosenDirection)
+    if (chosenDirection === 'none') {
+      this.backTrack()
+      chosenDirection = this.chooseMove()
+    } 
     this.knockoutWalls(chosenDirection)
-    console.log(chosenDirection)
     this.moveCursor(chosenDirection)
+    this.stack.push(cursorId)             // push current position onto stack
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MazemakerService } from '../../mazemaker.service'
 import { Cell } from '../../models/cell'
+import { DeprecatedDatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-generate',
@@ -8,13 +10,23 @@ import { Cell } from '../../models/cell'
 })
 export class GenerateComponent implements OnInit {
 
-  
-  constructor() {}
+  constructor(private mazemaker: MazemakerService) {}
 
   ngOnInit() { }
 
-  generateMaze(){
+ 
+  onGenerateMaze(){
     console.log('at generateMaze')
+    this.mazemaker.initBoard()
+    this.mazemaker.initBoard()
+    this.mazemaker.initCursor()
+   
+  }
+
+  onMove(){
+    this.mazemaker.runAlgo()
+    this.mazemaker.drawCursor()
+
   }
 
   
