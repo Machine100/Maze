@@ -31,6 +31,23 @@ export class MazemakerService {
     }
     console.log('board:',this.board)
   }
+
+  redrawBoard (){
+    let row:number = 0
+    let column:number = 0
+    for (row=0; row<6; row++){
+      for (column=0; column<6; column++){
+        let up:boolean = this.board[row][column].wallUp
+        let down:boolean = this.board[row][column].wallDown
+        let left:boolean = this.board[row][column].wallLeft
+        let right:boolean = this.board[row][column].wallRight
+        if (up) {document.getElementById(this.board[row][column].id).className = 'up'}
+        if (down) {document.getElementById(this.board[row][column].id).className = 'down'}
+        if (left) {document.getElementById(this.board[row][column].id).className = 'left'}
+        if (right) {document.getElementById(this.board[row][column].id).className = 'right'}
+      }
+    }
+  }
   
   initGrid (){
     let row:number = 0
@@ -39,7 +56,7 @@ export class MazemakerService {
     for (row=0; row<6; row++){
       for (column=0; column<6; column++){
         id = row.toString() + column.toString()
-        document.getElementById(id).className = 'empty'
+        document.getElementById(id).className = 'four'
       }
     }
   }
@@ -53,7 +70,7 @@ export class MazemakerService {
   drawCursor(){
     let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
     document.getElementById(cursorId).className = 'filled'
-  }
+   }
 
   checkDown(){
     let onStack:boolean = false
@@ -151,31 +168,24 @@ export class MazemakerService {
   backTrack(){
     let backtrackRow:number
     let backtrackColumn:number
-    
+    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
     this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
-    //start loop until
-    
-    //-------------get last position and put into test variables
-    let result:string = this.stack.pop() ; console.log ('result:', result)
+    document.getElementById(cursorId).className = 'visited' // color grid
+    let result:string = this.stack.pop() ; console.log ('result:', result) //pop stack
     let resultarray:string[] = result.split('') ; console.log('resultarray',resultarray)
     backtrackRow = Number(resultarray[0]);
     backtrackColumn = Number(resultarray[1])
-    //---------------
-
-    //  chk if any moves possible
-    //    if so, break and begin at checkMoves
-    //set master position to this spot and recursivly call self
+    this.cursorRow = backtrackRow           // set master cursor position to stackpop position
+    this.cursorColumn = backtrackColumn     //
   }
   
   runAlgo(){
-    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
-      console.log('cursorId:',cursorId)
-    let chosenDirection:string = this.chooseMove()
-      console.log(chosenDirection)
-    if (chosenDirection === 'none') {
-      this.backTrack()
-      chosenDirection = this.chooseMove()
-    } 
+    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString(); console.log('cursorId:',cursorId)
+    let chosenDirection:string = 'none'
+    while (chosenDirection === 'none') {
+      chosenDirection = this.chooseMove(); console.log(chosenDirection)
+      if (chosenDirection === 'none') { this.backTrack() }
+    }  
     this.knockoutWalls(chosenDirection)
     this.moveCursor(chosenDirection)
     this.stack.push(cursorId)             // push current position onto stack

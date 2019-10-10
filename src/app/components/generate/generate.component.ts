@@ -18,7 +18,6 @@ export class GenerateComponent implements OnInit {
   onGenerateMaze(){
     console.log('at generateMaze')
     this.mazemaker.initBoard()
-    this.mazemaker.initBoard()
     this.mazemaker.initCursor()
    
   }
@@ -29,5 +28,8 @@ export class GenerateComponent implements OnInit {
 
   }
 
+  onRedrawMaze(){
+    this.mazemaker.redrawBoard()
+  }
   
 }

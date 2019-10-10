@@ -8,14 +8,36 @@
 
 .grid-item{
     border-color: grey;
-    border-style: solid;
+    border-top-style: solid;
 }
 
 .filled{
-    border-style: solid;
     border-color: blue;
 }
 
 .empty{
     border-color: lightyellow;
 }
+
+.visited{
+    border-color: green;
+    border-style: solid;
+}
+
+.right{
+    border-right-style:solid;
+}
+.left{
+    border-left-style:solid;
+}.up{
+    border-top-style:solid;
+}.down{
+    border-bottom-style:solid;
+}
+.four{
+    border-top-style:solid;
+    border-bottom-style:solid;
+    border-left-style:solid;
+    border-right-style:solid;
+}
+
