@@ -41,10 +41,28 @@ export class MazemakerService {
         let down:boolean = this.board[row][column].wallDown
         let left:boolean = this.board[row][column].wallLeft
         let right:boolean = this.board[row][column].wallRight
-        if (up) {document.getElementById(this.board[row][column].id).className = 'up'}
-        if (down) {document.getElementById(this.board[row][column].id).className = 'down'}
-        if (left) {document.getElementById(this.board[row][column].id).className = 'left'}
-        if (right) {document.getElementById(this.board[row][column].id).className = 'right'}
+
+        if (!!(right&&left&&up&&down)){document.getElementById(this.board[row][column].id).className = 'none'}
+
+        if (up) {document.getElementById(this.board[row][column].id).className = 'u'};
+        if (down) {document.getElementById(this.board[row][column].id).className = 'd'};
+        if (left) {document.getElementById(this.board[row][column].id).className = 'l'};
+        if (right) {document.getElementById(this.board[row][column].id).className = 'r'};
+
+        if (up&&down) {document.getElementById(this.board[row][column].id).className = 'ud'}; 
+        if (left&&down) {document.getElementById(this.board[row][column].id).className = 'ld'};
+        if (left&&up) {document.getElementById(this.board[row][column].id).className = 'lu'};
+        if (right&&down) {document.getElementById(this.board[row][column].id).className = 'rd'};
+        if (right&&up) {document.getElementById(this.board[row][column].id).className = 'ru'};
+        if (right&&left) {document.getElementById(this.board[row][column].id).className = 'rl'};
+
+        if (left&&up&&down) {document.getElementById(this.board[row][column].id).className = 'lud'};
+        if (right&&up&&down) {document.getElementById(this.board[row][column].id).className = 'rud'};
+        if (right&&left&&down) {document.getElementById(this.board[row][column].id).className = 'rld'};
+        if (right&&left&&up) {document.getElementById(this.board[row][column].id).className = 'rlu'};
+
+        if (right&&left&&up&&down) {document.getElementById(this.board[row][column].id).className = 'rlud'};
+
       }
     }
   }
@@ -56,7 +74,7 @@ export class MazemakerService {
     for (row=0; row<6; row++){
       for (column=0; column<6; column++){
         id = row.toString() + column.toString()
-        document.getElementById(id).className = 'four'
+        document.getElementById(id).className = 'rlud'
       }
     }
   }
@@ -69,7 +87,7 @@ export class MazemakerService {
 
   drawCursor(){
     let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
-    document.getElementById(cursorId).className = 'filled'
+    //document.getElementById(cursorId).className = 'filled'
    }
 
   checkDown(){

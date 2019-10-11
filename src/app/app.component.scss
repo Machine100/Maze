@@ -24,17 +24,76 @@
     border-style: solid;
 }
 
-.right{
+.none{
+    border-style: none;   
+}
+.r{
     border-right-style:solid;
 }
-.left{
+.l{
     border-left-style:solid;
-}.up{
+}.u{
     border-top-style:solid;
-}.down{
+}.d{
     border-bottom-style:solid;
 }
-.four{
+.ud{
+    border-top-style:solid;
+    border-bottom-style:solid;
+}
+.ld{
+    border-left-style:solid;
+    border-bottom-style:solid;
+}
+.lu{
+    border-top-style:solid;
+
+    border-left-style:solid;
+
+}
+.rd{
+
+    border-bottom-style:solid;
+
+    border-right-style:solid;
+}
+.ru{
+    border-top-style:solid;
+
+
+    border-right-style:solid;
+}
+.rl{
+
+
+    border-left-style:solid;
+    border-right-style:solid;
+}
+.lud{
+    border-top-style:solid;
+    border-bottom-style:solid;
+    border-left-style:solid;
+
+}
+.rud{
+    border-top-style:solid;
+    border-bottom-style:solid;
+
+    border-right-style:solid;
+}
+.rld{
+
+    border-bottom-style:solid;
+    border-left-style:solid;
+    border-right-style:solid;
+}
+.rlu{
+    border-top-style:solid;
+
+    border-left-style:solid;
+    border-right-style:solid;
+}
+.rlud{
     border-top-style:solid;
     border-bottom-style:solid;
     border-left-style:solid;
