@@ -1,3 +1,5 @@
+
+
 .grid-wrapper {
     display: grid;
     grid-template-columns: repeat(6, 30px);
@@ -5,38 +7,26 @@
     border-style: solid;
     border-color: red;
 }
-
 .grid-item{
     border-color: grey;
     border-top-style: solid;
 }
 
-.filled{
-    border-color: blue;
-}
-
-.empty{
-    border-color: lightyellow;
-}
+.filled{ background-color: blue; }
+.empty{ border-color: lightyellow; }
 
 .visited{
     border-color: green;
     border-style: solid;
 }
 
-.none{
-    border-style: none;   
-}
-.r{
-    border-right-style:solid;
-}
-.l{
-    border-left-style:solid;
-}.u{
-    border-top-style:solid;
-}.d{
-    border-bottom-style:solid;
-}
+.none{ border-style: none; }
+
+.r{ border-right-style:solid; }
+.l{ border-left-style:solid; }
+.u{ border-top-style:solid; }
+.d{ border-bottom-style:solid; }
+
 .ud{
     border-top-style:solid;
     border-bottom-style:solid;
@@ -47,25 +37,17 @@
 }
 .lu{
     border-top-style:solid;
-
     border-left-style:solid;
-
 }
 .rd{
-
     border-bottom-style:solid;
-
     border-right-style:solid;
 }
 .ru{
     border-top-style:solid;
-
-
     border-right-style:solid;
 }
 .rl{
-
-
     border-left-style:solid;
     border-right-style:solid;
 }
@@ -73,23 +55,19 @@
     border-top-style:solid;
     border-bottom-style:solid;
     border-left-style:solid;
-
 }
 .rud{
     border-top-style:solid;
     border-bottom-style:solid;
-
     border-right-style:solid;
 }
 .rld{
-
     border-bottom-style:solid;
     border-left-style:solid;
     border-right-style:solid;
 }
 .rlu{
     border-top-style:solid;
-
     border-left-style:solid;
     border-right-style:solid;
 }

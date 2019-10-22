@@ -87,7 +87,10 @@ export class MazemakerService {
 
   drawCursor(){
     let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
-    //document.getElementById(cursorId).className = 'filled'
+    console.log('id:',cursorId)
+    console.log ('classList:', document.getElementById(cursorId).classList.item(0))
+    document.getElementById(cursorId).classList.add('filled')
+    console.log ('classList:', document.getElementById(cursorId).classList.item(1))
    }
 
   checkDown(){
@@ -188,7 +191,7 @@ export class MazemakerService {
     let backtrackColumn:number
     let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
     this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
-    document.getElementById(cursorId).className = 'visited' // color grid
+    //document.getElementById(cursorId).className = 'visited' // color grid
     let result:string = this.stack.pop() ; console.log ('result:', result) //pop stack
     let resultarray:string[] = result.split('') ; console.log('resultarray',resultarray)
     backtrackRow = Number(resultarray[0]);

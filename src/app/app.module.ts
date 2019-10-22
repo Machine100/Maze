@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GridpatternComponent } from './components/gridpattern/gridpattern.component';
 import { GenerateComponent } from './components/generate/generate.component';
+import { PlaymazeComponent } from './components/playmaze/playmaze.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridpatternComponent,
-    GenerateComponent
+    GenerateComponent,
+    PlaymazeComponent
   ],
   imports: [
     BrowserModule,
