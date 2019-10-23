@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MazemakerService } from '../../mazemaker.service'
+import { MazeplayService } from '../../mazeplay.service'
 //import { Cell } from '../../models/cell'
 //import { DeprecatedDatePipe } from '@angular/common';
 
@@ -10,7 +11,10 @@ import { MazemakerService } from '../../mazemaker.service'
 })
 export class GenerateComponent implements OnInit {
 
-  constructor(private mazemaker: MazemakerService) {}
+  constructor(
+    private mazemaker: MazemakerService,
+    private mazeplay: MazeplayService
+    ) {}
 
   ngOnInit() { }
 
@@ -26,10 +30,13 @@ export class GenerateComponent implements OnInit {
     this.mazemaker.runAlgo()
     this.mazemaker.redrawBoard()
     this.mazemaker.drawCursor()
+    this.mazeplay.board  = this.mazemaker.board
+      console.log('board has moved over:')
   }
 
   onRedrawMaze(){
     this.mazemaker.redrawBoard()
+
   }
   
 }

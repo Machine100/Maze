@@ -138,8 +138,8 @@ export class MazemakerService {
     let resultRight:boolean = false
     let resultUp:boolean = false
     let resultLeft:boolean = false
-    if (this.cursorRow    != 5) {resultDown = this.checkDown()}
-    if (this.cursorColumn != 5) {resultRight = this.checkRight()}
+    if (this.cursorRow    != 5) {resultDown = this.checkDown()}    // check that moves are within 
+    if (this.cursorColumn != 5) {resultRight = this.checkRight()}  // the outside boundrary
     if (this.cursorRow    != 0) {resultUp = this.checkUp()}
     if (this.cursorColumn != 0) {resultLeft = this.checkLeft()}
     console.log('right:',resultRight,'down:',resultDown,'left:',resultLeft,'up:',resultUp)
