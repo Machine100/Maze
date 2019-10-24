@@ -18,27 +18,27 @@ export class PlayercontrolComponent implements OnInit {
   ngOnInit() {}
 
   onUp() {
-    this.mazeplay.validateMove('up')  // check walls and boundary
+    if ( !(this.mazeplay.validateMove('up')) ) {return}  //if move is not valid, reject themove
     this.mazeplay.movePlayer('up')
-    //this.mazeplay.redrawBoard()
+    this.mazeplay.redrawBoard()
     this.mazeplay.drawPlayer()
   }
   onDown() { 
-    if ( !(this.mazeplay.validateMove('down')) ) {return}
+    if ( !(this.mazeplay.validateMove('down')) ) {return}  //if move is not valid, reject themove
     this.mazeplay.movePlayer('down')
     this.mazeplay.redrawBoard()
     this.mazeplay.drawPlayer()
   }
   onLeft() {
-    this.mazeplay.validateMove('left')
+    if ( !(this.mazeplay.validateMove('left')) ) {return}  //if move is not valid, reject themove
     this.mazeplay.movePlayer('left')
-    //this.mazeplay.redrawBoard()
+    this.mazeplay.redrawBoard()
     this.mazeplay.drawPlayer()
   }
   onRight() {
-    this.mazeplay.validateMove('right')
+    if ( !(this.mazeplay.validateMove('right')) ) {return}  //if move is not valid, reject themove
     this.mazeplay.movePlayer('right')
-    //this.mazeplay.redrawBoard()
+    this.mazeplay.redrawBoard()
     this.mazeplay.drawPlayer()
   }
 

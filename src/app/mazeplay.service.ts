@@ -17,11 +17,19 @@ export class MazeplayService {
     this.playerColumn = 0
   }
 
-  validateMove (direction:string){
-    if (this.playerRow === 0 && direction === 'up') { console.log('invalid move') }      // handle invalid wall
-    if (this.playerRow === 5 && direction === 'down') { console.log('invalid move');return false }    // handle invalid wall
-    if (this.playerColumn === 0 && direction === 'left') { console.log('invalid move') } // handle invalid wall
-    if (this.playerRow === 5 && direction === 'right') { console.log('invalid move') }   // handle invalid wall
+  validateMove (direction:string){                     //check if boundary blocks the move
+    if (this.playerRow === 0 && direction === 'up') { console.log('invalid move'); return false }     
+    if (this.playerRow === 5 && direction === 'down') { console.log('invalid move'); return false }   
+    if (this.playerColumn === 0 && direction === 'left') { console.log('invalid move'); return false }
+    if (this.playerColumn === 5 && direction === 'right') { console.log('invalid move'); return false }  
+
+    //let id:string = this.playerRow.toString() + this.playerColumn.toString()
+    //console.log ('id:',id)                           //check if a wall blocks the move
+    if (this.board[this.playerRow][this.playerColumn].wallUp === true && direction === 'up') { console.log('wall block'); return false } 
+    if (this.board[this.playerRow][this.playerColumn].wallDown === true && direction === 'down') { console.log('wall block'); return false } 
+    if (this.board[this.playerRow][this.playerColumn].wallLeft === true && direction === 'left') { console.log('wall block'); return false }
+    if (this.board[this.playerRow][this.playerColumn].wallRight === true && direction === 'right') { console.log('wall block'); return false } 
+     
     return true
   }
   
@@ -39,9 +47,9 @@ export class MazeplayService {
     let playerId:string = this.playerRow.toString() + this.playerColumn.toString()
     console.log('id:',playerId)
     console.log ('classList:', document.getElementById(playerId).classList.item(0))
-    document.getElementById(playerId).classList.add('filled')
+    document.getElementById(playerId).classList.add('player-here')
     console.log ('classList:', document.getElementById(playerId).classList.item(1))
-   }
+  }
 
    redrawBoard (){
     let row:number = 0

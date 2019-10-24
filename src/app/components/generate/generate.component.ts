@@ -19,7 +19,7 @@ export class GenerateComponent implements OnInit {
   ngOnInit() { }
 
  
-  onGenerateMaze(){
+  onInitMaze(){
     console.log('at generateMaze')
     this.mazemaker.initBoard()
     this.mazemaker.initCursor()

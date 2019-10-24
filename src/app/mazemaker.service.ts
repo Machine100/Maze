@@ -191,13 +191,14 @@ export class MazemakerService {
     let backtrackColumn:number
     let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
     this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
-    //document.getElementById(cursorId).className = 'visited' // color grid
+    //document.getElementById(cursorId).className = 'visited' //color grid
     let result:string = this.stack.pop() ; console.log ('result:', result) //pop stack
+    if (this.stack.length === 0) {console.log('mazecomplete'); return}       // if stack is empty, maze is complete
     let resultarray:string[] = result.split('') ; console.log('resultarray',resultarray)
     backtrackRow = Number(resultarray[0]);
     backtrackColumn = Number(resultarray[1])
-    this.cursorRow = backtrackRow           // set master cursor position to stackpop position
-    this.cursorColumn = backtrackColumn     //
+    this.cursorRow = backtrackRow            //set master cursor position to stackpop position
+    this.cursorColumn = backtrackColumn     
   }
   
   runAlgo(){
@@ -205,11 +206,14 @@ export class MazemakerService {
     let chosenDirection:string = 'none'
     while (chosenDirection === 'none') {
       chosenDirection = this.chooseMove(); console.log(chosenDirection)
-      if (chosenDirection === 'none') { this.backTrack() }
+      if (chosenDirection === 'none') { 
+        this.backTrack()                     //on returning from backtrack
+        if (this.stack.length === 0) return  //if stack is empty, maze is complete
+      }
     }  
     this.knockoutWalls(chosenDirection)
     this.moveCursor(chosenDirection)
-    this.stack.push(cursorId)             // push current position onto stack
+    this.stack.push(cursorId)                //push current position onto stack
   }
 
 }
