@@ -19,9 +19,9 @@ export class MazeplayService {
 
   validateMove (direction:string){                     //check if boundary blocks the move
     if (this.playerRow === 0 && direction === 'up') { console.log('invalid move'); return false }     
-    if (this.playerRow === 5 && direction === 'down') { console.log('invalid move'); return false }   
+    if (this.playerRow === 9 && direction === 'down') { console.log('invalid move'); return false }   
     if (this.playerColumn === 0 && direction === 'left') { console.log('invalid move'); return false }
-    if (this.playerColumn === 5 && direction === 'right') { console.log('invalid move'); return false }  
+    if (this.playerColumn === 9 && direction === 'right') { console.log('invalid move'); return false }  
 
     //let id:string = this.playerRow.toString() + this.playerColumn.toString()
     //console.log ('id:',id)                           //check if a wall blocks the move
@@ -54,8 +54,8 @@ export class MazeplayService {
    redrawBoard (){
     let row:number = 0
     let column:number = 0
-    for (row=0; row<6; row++){
-      for (column=0; column<6; column++){
+    for (row=0; row<10; row++){
+      for (column=0; column<10; column++){
         let up:boolean = this.board[row][column].wallUp
         let down:boolean = this.board[row][column].wallDown
         let left:boolean = this.board[row][column].wallLeft

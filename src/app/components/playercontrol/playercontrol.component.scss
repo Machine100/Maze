@@ -1,0 +1,7 @@
+.grid-container{
+    display:grid;
+    border-style: solid;
+    border-color: lightcyan;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}

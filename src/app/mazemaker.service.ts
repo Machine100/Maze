@@ -10,18 +10,18 @@ export class MazemakerService {
 
   cursorRow: number                     
   cursorColumn: number
-  board: Cell[][]
+  board: Cell[][]       //a 2D array of objects representing each space on the maze
   stack: string[]
 
   initBoard() {
     let row:number = 0
     let column:number = 0
-    this.board = [ [],[],[],[],[],[] ]
-    for (row=0; row<6; row++){
-      for (column=0; column<6; column++){
+    this.board = [ [],[],[],[],[],[],[],[],[],[] ] 
+    for (row=0; row<10; row++){
+      for (column=0; column<10; column++){
           this.board[row][column] = {
-            id:        row.toString()+column.toString(),
-            visited:   false,
+            id: row.toString()+column.toString(),
+            visited: false,
             wallUp: true,
             wallDown: true,
             wallLeft: true,
@@ -35,8 +35,8 @@ export class MazemakerService {
   redrawBoard (){
     let row:number = 0
     let column:number = 0
-    for (row=0; row<6; row++){
-      for (column=0; column<6; column++){
+    for (row=0; row<10; row++){
+      for (column=0; column<10; column++){
         let up:boolean = this.board[row][column].wallUp
         let down:boolean = this.board[row][column].wallDown
         let left:boolean = this.board[row][column].wallLeft
@@ -138,8 +138,8 @@ export class MazemakerService {
     let resultRight:boolean = false
     let resultUp:boolean = false
     let resultLeft:boolean = false
-    if (this.cursorRow    != 5) {resultDown = this.checkDown()}    // check that moves are within 
-    if (this.cursorColumn != 5) {resultRight = this.checkRight()}  // the outside boundrary
+    if (this.cursorRow    != 9) {resultDown = this.checkDown()}    // check that moves are within 
+    if (this.cursorColumn != 9) {resultRight = this.checkRight()}  // the outside boundrary
     if (this.cursorRow    != 0) {resultUp = this.checkUp()}
     if (this.cursorColumn != 0) {resultLeft = this.checkLeft()}
     console.log('right:',resultRight,'down:',resultDown,'left:',resultLeft,'up:',resultUp)
@@ -193,7 +193,7 @@ export class MazemakerService {
     this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
     //document.getElementById(cursorId).className = 'visited' //color grid
     let result:string = this.stack.pop() ; console.log ('result:', result) //pop stack
-    if (this.stack.length === 0) {console.log('mazecomplete'); return}       // if stack is empty, maze is complete
+    if (this.stack.length === 0) {console.log('mazecomplete'); return}       //maze is complete
     let resultarray:string[] = result.split('') ; console.log('resultarray',resultarray)
     backtrackRow = Number(resultarray[0]);
     backtrackColumn = Number(resultarray[1])
@@ -208,7 +208,7 @@ export class MazemakerService {
       chosenDirection = this.chooseMove(); console.log(chosenDirection)
       if (chosenDirection === 'none') { 
         this.backTrack()                     //on returning from backtrack
-        if (this.stack.length === 0) return  //if stack is empty, maze is complete
+        if (this.stack.length === 0) return 'complete' //maze is complete
       }
     }  
     this.knockoutWalls(chosenDirection)

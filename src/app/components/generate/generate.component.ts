@@ -16,22 +16,29 @@ export class GenerateComponent implements OnInit {
     private mazeplay: MazeplayService
     ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.mazemaker.initBoard()
+    this.mazemaker.initCursor()
+   }
 
  
   onInitMaze(){
     console.log('at generateMaze')
     this.mazemaker.initBoard()
     this.mazemaker.initCursor()
-   
+    this.mazemaker.redrawBoard()
   }
 
   onMove(){
-    this.mazemaker.runAlgo()
-    this.mazemaker.redrawBoard()
-    this.mazemaker.drawCursor()
-    this.mazeplay.board  = this.mazemaker.board
+    let keepgoing:boolean = true
+    while (keepgoing) {                                //iterate until maze generation is complete
+      let result:string = this.mazemaker.runAlgo()
+      if (result === 'complete') {keepgoing = false}  
+      this.mazemaker.redrawBoard()
+      this.mazemaker.drawCursor()
+      this.mazeplay.board  = this.mazemaker.board
       console.log('board has moved over:')
+    }
   }
 
   onRedrawMaze(){
