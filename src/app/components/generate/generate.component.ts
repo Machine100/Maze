@@ -34,11 +34,12 @@ export class GenerateComponent implements OnInit {
     while (keepgoing) {                                //iterate until maze generation is complete
       let result:string = this.mazemaker.runAlgo()
       if (result === 'complete') {keepgoing = false}  
-      this.mazemaker.redrawBoard()
-      this.mazemaker.drawCursor()
+      
+      //this.mazemaker.drawCursor()
       this.mazeplay.board  = this.mazemaker.board
       console.log('board has moved over:')
     }
+    this.mazemaker.redrawBoard()
   }
 
   onRedrawMaze(){

@@ -42,7 +42,7 @@ export class MazemakerService {
         let left:boolean = this.board[row][column].wallLeft
         let right:boolean = this.board[row][column].wallRight
 
-        if (!!(right&&left&&up&&down)){document.getElementById(this.board[row][column].id).className = 'none'}
+        if (!(right&&left&&up&&down)){document.getElementById(this.board[row][column].id).className = 'none'}
 
         if (up) {document.getElementById(this.board[row][column].id).className = 'u'};
         if (down) {document.getElementById(this.board[row][column].id).className = 'd'};
@@ -62,7 +62,6 @@ export class MazemakerService {
         if (right&&left&&up) {document.getElementById(this.board[row][column].id).className = 'rlu'};
 
         if (right&&left&&up&&down) {document.getElementById(this.board[row][column].id).className = 'rlud'};
-
       }
     }
   }
@@ -91,7 +90,7 @@ export class MazemakerService {
     console.log ('classList:', document.getElementById(cursorId).classList.item(0))
     document.getElementById(cursorId).classList.add('filled')
     console.log ('classList:', document.getElementById(cursorId).classList.item(1))
-   }
+  }
 
   checkDown(){
     let onStack:boolean = false
@@ -143,9 +142,9 @@ export class MazemakerService {
     if (this.cursorRow    != 0) {resultUp = this.checkUp()}
     if (this.cursorColumn != 0) {resultLeft = this.checkLeft()}
     console.log('right:',resultRight,'down:',resultDown,'left:',resultLeft,'up:',resultUp)
-    for (let i=0; i<20; i++){
+    for (let i=0; i<30; i++){
       let random:number = (Math.floor(Math.random()*4))
-      console.log('random:',random)
+      //console.log('random:',random)
       if (random === 0 && resultDown) {return 'down'}
       if (random === 1 && resultRight) {return 'right'}
       if (random === 2 && resultUp) {return 'up'}
@@ -172,7 +171,7 @@ export class MazemakerService {
       case 'left':
         this.board[this.cursorRow][this.cursorColumn].wallLeft = false
         this.board[this.cursorRow][this.cursorColumn - 1].wallRight = false
-        }
+    }
   }
 
   moveCursor(direction:string){
@@ -180,7 +179,7 @@ export class MazemakerService {
       case 'down': ++this.cursorRow; break
       case 'right': ++this.cursorColumn; break
       case 'up': --this.cursorRow; break
-      case 'left': --this.cursorColumn
+      case 'left': --this.cursorColumn; break
     }
     console.log('cursorRow',this.cursorRow,'cursorColumn:',this.cursorColumn)
     console.log('stack:',this.stack)
@@ -189,7 +188,7 @@ export class MazemakerService {
   backTrack(){
     let backtrackRow:number
     let backtrackColumn:number
-    let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
+    //let cursorId:string = this.cursorRow.toString() + this.cursorColumn.toString()
     this.board[this.cursorRow][this.cursorColumn].visited = true  //mark position as visited
     //document.getElementById(cursorId).className = 'visited' //color grid
     let result:string = this.stack.pop() ; console.log ('result:', result) //pop stack
@@ -214,6 +213,7 @@ export class MazemakerService {
     this.knockoutWalls(chosenDirection)
     this.moveCursor(chosenDirection)
     this.stack.push(cursorId)                //push current position onto stack
+    console.log('--------------------')
   }
 
 }
