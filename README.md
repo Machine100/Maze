@@ -2,7 +2,7 @@
 
 Generates a maze using the recursive backtracker algorithm. Allows a player to then traverse the maze.
 
-_________ is a live endpoint to play the maze.
+http://mmaazzee.s3-website-us-east-1.amazonaws.com is a live endpoint to play the maze.
 
 A Typescript project in the Angular framework.
 
