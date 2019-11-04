@@ -3,7 +3,7 @@
     grid-template-columns: repeat(10, 35px);
     grid-template-rows: repeat(10, 35px);
     border-style: solid;
-    border-color: red;
+    border-color: yellow;
 }
 .grid-item{
     border-color: grey;
@@ -12,7 +12,7 @@
 
 .none{ border-style: none; }
 .filled{ background-color: blue; }
-.player-here{ background-color: lightyellow; }
+.player-here{ background-color: red; }
 
 .r{ 
     border-color: grey;
