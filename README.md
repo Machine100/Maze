@@ -1,3 +1,5 @@
+This codebase has been superceded by the MazeBattle repo. Development continues at that location.
+
 # Maze
 
 This project is live at endpoint http://mmaazzee.s3-website-us-east-1.amazonaws.com 
